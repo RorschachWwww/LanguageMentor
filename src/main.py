@@ -10,7 +10,8 @@ conversation_agent = ConversationAgent()
 agents = {
     "job_interview": ScenarioAgent("job_interview"),  # 求职面试场景代理
     "hotel_checkin": ScenarioAgent("hotel_checkin"),  # 酒店入住场景代理
-    # "salary_negotiation": ScenarioAgent("salary_negotiation"),  # 薪资谈判场景代理（注释掉）
+    "salary_negotiation": ScenarioAgent("salary_negotiation"),  # 薪资谈判场景代理（注释掉）
+    "order_coffee": ScenarioAgent("order_coffee"),  # 点咖啡场景代理（注释掉）
     # "renting": ScenarioAgent("renting")  # 租房场景代理（注释掉）
 }
 
@@ -22,7 +23,7 @@ def handle_conversation(user_input, chat_history):
 
 # 获取场景介绍的函数
 def get_scenario_intro(scenario):
-    with open(f"content/page/{scenario}.md", "r") as file:  # 打开对应场景的介绍文件
+    with open(f"content/page/{scenario}.md", "r", encoding="utf-8") as file:  # 打开对应场景的介绍文件
         scenario_intro = file.read().strip()  # 读取文件内容并去除多余空白
     return scenario_intro  # 返回场景介绍内容
 
@@ -42,7 +43,8 @@ with gr.Blocks(title="LanguageMentor 英语私教") as language_mentor_app:
             choices=[
                 ("求职面试", "job_interview"),  # 求职面试选项
                 ("酒店入住", "hotel_checkin"),  # 酒店入住选项
-                # ("薪资谈判", "salary_negotiation"),  # 薪资谈判选项（注释掉）
+                ("薪资谈判", "salary_negotiation"),  # 薪资谈判选项（注释掉）
+                ("点咖啡", "order_coffee"),  # 薪资谈判选项（注释掉）
                 # ("租房", "renting")  # 租房选项（注释掉）
             ], 
             label="场景"  # 单选框标签
@@ -99,4 +101,4 @@ with gr.Blocks(title="LanguageMentor 英语私教") as language_mentor_app:
 
 # 启动应用
 if __name__ == "__main__":
-    language_mentor_app.launch(share=True, server_name="0.0.0.0")  # 启动 Gradio 应用并共享
+    language_mentor_app.launch(share=True, server_name="127.0.0.1")  # 启动 Gradio 应用并共享
